@@ -113,7 +113,7 @@ pub struct ParameterError {
 }
 
 /// Details how a parameter is malformed.
-#[derive(Clone, Debug, Hash, PartialEq)]
+#[derive(Clone, Debug, Hash, PartialEq, Eq)]
 #[non_exhaustive]
 pub enum ParameterErrorKind {
     /// The dimensions passed are wrong.
@@ -173,7 +173,7 @@ pub enum LimitErrorKind {
 }
 
 /// A best effort representation for image formats.
-#[derive(Clone, Debug, Hash, PartialEq)]
+#[derive(Clone, Debug, Hash, PartialEq, Eq)]
 #[non_exhaustive]
 pub enum ImageFormatHint {
     /// The format is known exactly.

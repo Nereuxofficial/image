@@ -589,13 +589,13 @@ mod test {
 
     #[test]
     fn test_grayscale() {
-        let mut image: GrayImage =
+        let image: GrayImage =
             ImageBuffer::from_raw(3, 2, vec![00u8, 01u8, 02u8, 10u8, 11u8, 12u8]).unwrap();
 
         let expected: GrayImage =
             ImageBuffer::from_raw(3, 2, vec![00u8, 01u8, 02u8, 10u8, 11u8, 12u8]).unwrap();
 
-        assert_pixels_eq!(&grayscale(&mut image), &expected);
+        assert_pixels_eq!(&grayscale(&image), &expected);
     }
 
     #[test]

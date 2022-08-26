@@ -1037,7 +1037,7 @@ where
     type Target = [P::Subpixel];
 
     fn deref(&self) -> &<Self as Deref>::Target {
-        &*self.data
+        &self.data
     }
 }
 
@@ -1047,7 +1047,7 @@ where
     Container: Deref<Target = [P::Subpixel]> + DerefMut,
 {
     fn deref_mut(&mut self) -> &mut <Self as Deref>::Target {
-        &mut *self.data
+        &mut self.data
     }
 }
 

@@ -463,10 +463,9 @@ mod test {
         #[cfg(feature = "hdr")]
         {
             let folder = BASE_PATH.iter().collect::<PathBuf>();
-            let reference_path = folder.clone().join("overexposed gradient.hdr");
-            let exr_path = folder
-                .clone()
-                .join("overexposed gradient - data window equals display window.exr");
+            let reference_path = folder.join("overexposed gradient.hdr");
+            let exr_path =
+                folder.join("overexposed gradient - data window equals display window.exr");
 
             let hdr: Vec<Rgb<f32>> = crate::codecs::hdr::HdrDecoder::new(std::io::BufReader::new(
                 std::fs::File::open(&reference_path).unwrap(),
@@ -561,10 +560,8 @@ mod test {
         // auto-cropped image will be reproduced to the original.
 
         let exr_path = BASE_PATH.iter().collect::<PathBuf>();
-        let original = exr_path.clone().join("cropping - uncropped original.exr");
-        let cropped = exr_path
-            .clone()
-            .join("cropping - data window differs display window.exr");
+        let original = exr_path.join("cropping - uncropped original.exr");
+        let cropped = exr_path.join("cropping - data window differs display window.exr");
 
         // smoke-check that the exr files are actually not the same
         {

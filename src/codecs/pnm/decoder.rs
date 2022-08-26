@@ -506,7 +506,7 @@ trait HeaderReader: BufRead {
             #[allow(deprecated)]
             let (identifier, rest) = line
                 .trim_left()
-                .split_at(line.find(char::is_whitespace).unwrap_or_else(|| line.len()));
+                .split_at(line.find(char::is_whitespace).unwrap_or(line.len()));
             match identifier {
                 "ENDHDR" => break,
                 "HEIGHT" => parse_single_value_line(&mut height, rest, PnmHeaderLine::Height)?,
@@ -1051,7 +1051,7 @@ ENDHDR
     fn pbm_binary() {
         // The data contains two rows of the image (each line is padded to the full byte). For
         // comments on its format, see documentation of `impl SampleType for PbmBit`.
-        let pbmbinary = [&b"P4 6 2\n"[..], &[0b01101100 as u8, 0b10110111]].concat();
+        let pbmbinary = [&b"P4 6 2\n"[..], &[0b01101100_u8, 0b10110111]].concat();
         let decoder = PnmDecoder::new(&pbmbinary[..]).unwrap();
         assert_eq!(decoder.color_type(), ColorType::L8);
         assert_eq!(decoder.original_color_type(), ExtendedColorType::L1);

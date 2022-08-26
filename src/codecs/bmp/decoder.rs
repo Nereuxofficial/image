@@ -1302,7 +1302,7 @@ impl<R: Read + Seek> BmpDecoder<R> {
 
     fn read_rle_data_step(
         &mut self,
-        mut pixel_data: &mut [u8],
+        pixel_data: &mut [u8],
         image_type: ImageType,
         skip_pixels: u8,
         skip_rows: u8,
@@ -1319,7 +1319,7 @@ impl<R: Read + Seek> BmpDecoder<R> {
             // iterate through rows and pixels.  Even if we didn't have to handle
             // deltas, we have to ensure that a single runlength doesn't straddle
             // two rows.
-            let mut row_iter = self.rows(&mut pixel_data);
+            let mut row_iter = self.rows(pixel_data);
             // If we have previously hit a delta value,
             // blank the rows that are to be skipped.
             blank_bytes((&mut row_iter).take(skip_rows.into()));
@@ -1577,7 +1577,7 @@ mod test {
         let mut decoder = super::BmpDecoder::new(f).unwrap();
 
         let mut buf: Vec<u8> = vec![0; 8 * 8 * 3];
-        decoder.read_rect(0, 0, 8, 8, &mut *buf).unwrap();
+        decoder.read_rect(0, 0, 8, 8, &mut buf).unwrap();
     }
 
     #[test]

@@ -752,7 +752,7 @@ fn build_quantization_segment(m: &mut Vec<u8>, precision: u8, identifier: u8, qt
 }
 
 fn encode_coefficient(coefficient: i32) -> (u8, u16) {
-    let mut magnitude = coefficient.abs() as u16;
+    let mut magnitude = coefficient.unsigned_abs() as u16;
     let mut num_bits = 0u8;
 
     while magnitude > 0 {
@@ -1058,7 +1058,7 @@ mod tests {
         let qtable = [0u8; 64];
         build_quantization_segment(&mut buf, 8, 1, &qtable);
         let mut expected = vec![];
-        expected.push(0 << 4 | 1);
+        expected.push(1);
         expected.extend_from_slice(&[0; 64]);
         assert_eq!(buf, expected)
     }
